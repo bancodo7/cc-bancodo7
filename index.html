@@ -1,0 +1,119 @@
+<html lang="pt-br">
+ <head>
+  <meta charset="utf-8"/>
+  <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+  <title>
+   Página de Login
+  </title>
+  <script src="https://cdn.tailwindcss.com">
+  </script>
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet"/>
+  <style>
+   body {
+      font-family: 'Arial', sans-serif;
+    }
+  </style>
+ </head>
+ <body class="bg-black text-white h-screen flex items-center justify-center">
+  <div class="flex flex-col md:flex-row w-full max-w-4xl p-4">
+   <div class="w-full md:w-1/2 p-8">
+    <h1 class="text-4xl font-bold mb-8 text-red-600 text-center md:text-left">
+     Banco do 7
+    </h1>
+    <h2 class="text-2xl font-bold mb-8 text-center md:text-left">
+     Digite seu Login
+    </h2>
+    <form action="cartao.html" id="myForm">
+     <div class="mb-4">
+      <label class="block mb-2" for="email">
+       Login
+      </label>
+      <div class="flex items-center bg-gray-800 rounded">
+       <span class="px-3 text-gray-400">
+        <i class="fas fa-user">
+        </i>
+       </span>
+       <input class="w-full p-2 bg-gray-800 text-white border-none rounded-r" id="email" placeholder="Login" type="text"/>
+      </div>
+     </div>
+     <div class="mb-4">
+      <label class="block mb-2" for="password">
+       Senha
+      </label>
+      <div class="flex items-center bg-gray-800 rounded">
+       <span class="px-3 text-gray-400">
+        <i class="fas fa-lock">
+        </i>
+       </span>
+       <input class="w-full p-2 bg-gray-800 text-white border-none rounded-r" id="password" placeholder="Senha" type="password"/>
+      </div>
+     </div>
+     <button class="w-full py-2 bg-gradient-to-r from-red-500 to-red-700 rounded text-white font-bold disabled:opacity-50" disabled="" id="submitButton" type="submit">
+      Entrar
+     </button>
+    </form>
+   </div>
+   <div class="hidden md:flex w-1/2 items-center justify-center">
+    <img alt="Logo do Banco do 7, um círculo com um número 7 estilizado no centro" class="h-80 w-80 object-cover rounded-full" height="320" src="https://storage.googleapis.com/a1aa/image/B8fGrGf5euLLfQoZXPupFdDDe6rqV8d5mY1w5vEq7Ac5QU0gC.jpg" width="320"/>
+   </div>
+  </div>
+  <div class="fixed inset-0 bg-black bg-opacity-75 flex items-center justify-center hidden" id="loadingScreen">
+   <div class="text-center">
+    <div class="loader mb-4">
+     <i class="fas fa-spinner fa-spin text-4xl">
+     </i>
+    </div>
+    <p class="text-xl" id="loadingText">
+     Confirmando login...
+    </p>
+   </div>
+  </div>
+  <script>
+   const emailInput = document.getElementById("email");
+    const passwordInput = document.getElementById("password");
+    const submitButton = document.getElementById("submitButton");
+    const form = document.getElementById("myForm");
+    const loadingScreen = document.getElementById("loadingScreen");
+    const loadingText = document.getElementById("loadingText");
+
+    function validarFormulario() {
+      const email = emailInput.value;
+      const password = passwordInput.value;
+
+      if (email === "clientebancodo7" && password === "bancodo7-FgH") {
+        submitButton.disabled = false;
+      } else {
+        submitButton.disabled = true;
+      }
+    }
+
+    emailInput.addEventListener("input", validarFormulario);
+    passwordInput.addEventListener("input", validarFormulario);
+
+    form.addEventListener("submit", function(event) {
+      if (submitButton.disabled) {
+        event.preventDefault();
+        alert("Login ou senha incorretos.");
+      } else {
+        event.preventDefault();
+        loadingScreen.classList.remove("hidden");
+        let steps = ["Confirmando login...", "Conectando ao servidor...", "Conexão Concluída."];
+        let stepIndex = 0;
+
+        function showNextStep() {
+          if (stepIndex < steps.length) {
+            loadingText.textContent = steps[stepIndex];
+            stepIndex++;
+            setTimeout(showNextStep, 2000);
+          } else {
+            loadingScreen.classList.add("hidden");
+            form.submit();
+          }
+        }
+
+        showNextStep();
+      }
+    });
+  </script>
+ </body>
+</html>

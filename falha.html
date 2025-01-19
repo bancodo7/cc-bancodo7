@@ -1,0 +1,60 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Houve algum erro</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+    <style>
+        .spinner {
+            border: 4px solid rgba(0, 0, 0, 0.1);
+            border-left-color: #f97316;
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            animation: spin 1s linear infinite;
+        }
+
+        @keyframes spin {
+            to {
+                transform: rotate(360deg);
+            }
+        }
+    </style>
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            const loader = document.getElementById('loader');
+            const content = document.getElementById('content');
+            setTimeout(() => {
+                loader.style.display = 'none';
+                content.style.display = 'flex';
+            }, 2000); // Simulate loading time
+        });
+    </script>
+</head>
+<body class="flex flex-col items-center justify-center min-h-screen bg-white">
+    <div id="loader" class="flex items-center justify-center min-h-screen">
+        <div class="spinner"></div>
+    </div>
+    <div id="content" class="hidden flex-col items-center justify-center min-h-screen">
+        <div class="absolute top-4 left-4">
+            <a href="cartao.html" class="text-orange-500">
+                <i class="fas fa-arrow-left"></i>
+            </a>
+        </div>
+        <h1 class="text-xl font-semibold mb-8">Houve algum erro</h1>
+        <div class="flex flex-col items-center">
+            <div class="bg-yellow-500 rounded-full p-4 mb-4">
+                <i class="fas fa-exclamation text-white text-2xl"></i>
+            </div>
+            <h2 class="text-lg font-semibold mb-2">Ops! Algo deu errado.</h2>
+            <p class="text-center text-gray-500 mb-8">
+                Desculpe pelo transtorno mas ocorreu um erro no nosso servidor, tente novamente mais tarde.[AGSE42]
+            </p>
+            <button onclick="location.reload()" class="bg-orange-500 text-white font-semibold py-2 px-4 rounded">
+                TENTAR NOVAMENTE
+            </button>
+        </div>
+    </div>
+</body>
+</html>
